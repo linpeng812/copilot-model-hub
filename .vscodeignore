@@ -12,3 +12,5 @@ vitest.config.ts
 *.zh.md
 IMPLEMENTATION_PLAN.md
 .gitignore
+img/**
+!img/icon.png
