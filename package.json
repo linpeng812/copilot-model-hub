@@ -1,0 +1,162 @@
+{
+  "name": "copilot-model-hub",
+  "displayName": "Copilot Model Hub",
+  "description": "Bring your own model connections (Chat Completions / Responses / Anthropic) into the Copilot Chat model picker.",
+  "version": "0.1.0",
+  "publisher": "GeneralYuwenChengdu",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/linpeng812/copilot-model-hub.git"
+  },
+  "engines": {
+    "vscode": "^1.116.0",
+    "node": ">=20"
+  },
+  "categories": [
+    "AI",
+    "Chat"
+  ],
+  "keywords": [
+    "copilot",
+    "copilot chat",
+    "language model",
+    "byok",
+    "openai",
+    "anthropic",
+    "responses",
+    "deepseek"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languageModelChatProviders": [
+      {
+        "vendor": "copilot-model-hub",
+        "displayName": "Copilot Model Hub"
+      }
+    ],
+    "commands": [
+      {
+        "command": "copilotModelHub.setApiKey",
+        "title": "Copilot Model Hub: Set API Key"
+      },
+      {
+        "command": "copilotModelHub.testConnection",
+        "title": "Copilot Model Hub: Test Connection"
+      },
+      {
+        "command": "copilotModelHub.openSettings",
+        "title": "Copilot Model Hub: Open Connections Settings"
+      }
+    ],
+    "configuration": {
+      "title": "Copilot Model Hub",
+      "properties": {
+        "copilotModelHub.connections": {
+          "type": "array",
+          "default": [],
+          "markdownDescription": "Model connections exposed in the Copilot Chat model picker. API keys are stored in SecretStorage, not here.",
+          "items": {
+            "type": "object",
+            "required": ["id", "name", "protocol", "baseUrl", "model"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9._-]*$",
+                "description": "Unique connection ID. Start with a lowercase letter or digit, then lowercase letters, digits, dots, underscores or hyphens."
+              },
+              "name": {
+                "type": "string",
+                "description": "Display name in the Copilot Chat model picker."
+              },
+              "protocol": {
+                "type": "string",
+                "enum": ["chat", "responses", "anthropic"],
+                "enumDescriptions": [
+                  "OpenAI-compatible Chat Completions API.",
+                  "OpenAI Responses API.",
+                  "Anthropic-compatible Messages API."
+                ]
+              },
+              "baseUrl": {
+                "type": "string",
+                "description": "Provider base URL, for example https://api.openai.com/v1."
+              },
+              "model": {
+                "type": "string",
+                "description": "Provider model name."
+              },
+              "secretKey": {
+                "type": "string",
+                "description": "Optional. SecretStorage key for the API key. Defaults to copilotModelHub.connection.{id}.apiKey."
+              },
+              "headers": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "capabilities": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "tools": { "type": "boolean", "default": true },
+                  "vision": { "type": "boolean", "default": false },
+                  "thinking": { "type": "boolean", "default": false }
+                }
+              },
+              "context": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "input": { "type": "number", "minimum": 1 },
+                  "output": { "type": "number", "minimum": 1 }
+                }
+              },
+              "request": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "temperature": { "type": "number" },
+                  "topP": { "type": "number" },
+                  "maxTokens": { "type": "number", "minimum": 0 },
+                  "timeoutMs": { "type": "number", "minimum": 1 },
+                  "maxRetries": { "type": "number", "minimum": 0 }
+                }
+              },
+              "thinking": {
+                "type": "object",
+                "description": "Thinking/reasoning config. Only used when capabilities.thinking is true."
+              },
+              "pricing": {
+                "type": "object",
+                "description": "Optional pricing info shown in the model picker."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "compile": "tsc -p ./ --noEmit && node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "typecheck": "tsc -p ./ --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "package": "vsce package -o dist/"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.116.0",
+    "@vscode/vsce": "^3.9.1",
+    "esbuild": "^0.25.10",
+    "typescript": "^5.6.0",
+    "vitest": "^3.2.4"
+  }
+}
