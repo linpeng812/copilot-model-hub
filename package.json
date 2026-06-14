@@ -2,7 +2,7 @@
   "name": "copilot-model-hub",
   "displayName": "Copilot Model Hub",
   "description": "Bring your own model connections (Chat Completions / Responses / Anthropic) into the Copilot Chat model picker.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "GeneralYuwenChengdu",
   "license": "MIT",
   "repository": {
@@ -62,7 +62,13 @@
           "markdownDescription": "Model connections exposed in the Copilot Chat model picker. API keys are stored in SecretStorage, not here.",
           "items": {
             "type": "object",
-            "required": ["id", "name", "protocol", "baseUrl", "model"],
+            "required": [
+              "id",
+              "name",
+              "protocol",
+              "baseUrl",
+              "model"
+            ],
             "additionalProperties": false,
             "properties": {
               "id": {
@@ -76,7 +82,11 @@
               },
               "protocol": {
                 "type": "string",
-                "enum": ["chat", "responses", "anthropic"],
+                "enum": [
+                  "chat",
+                  "responses",
+                  "anthropic"
+                ],
                 "enumDescriptions": [
                   "OpenAI-compatible Chat Completions API.",
                   "OpenAI Responses API.",
@@ -105,28 +115,56 @@
                 "type": "object",
                 "additionalProperties": false,
                 "properties": {
-                  "tools": { "type": "boolean", "default": true },
-                  "vision": { "type": "boolean", "default": false },
-                  "thinking": { "type": "boolean", "default": false }
+                  "tools": {
+                    "type": "boolean",
+                    "default": true
+                  },
+                  "vision": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "thinking": {
+                    "type": "boolean",
+                    "default": false
+                  }
                 }
               },
               "context": {
                 "type": "object",
                 "additionalProperties": false,
                 "properties": {
-                  "input": { "type": "number", "minimum": 1 },
-                  "output": { "type": "number", "minimum": 1 }
+                  "input": {
+                    "type": "number",
+                    "minimum": 1
+                  },
+                  "output": {
+                    "type": "number",
+                    "minimum": 1
+                  }
                 }
               },
               "request": {
                 "type": "object",
                 "additionalProperties": false,
                 "properties": {
-                  "temperature": { "type": "number" },
-                  "topP": { "type": "number" },
-                  "maxTokens": { "type": "number", "minimum": 0 },
-                  "timeoutMs": { "type": "number", "minimum": 1 },
-                  "maxRetries": { "type": "number", "minimum": 0 }
+                  "temperature": {
+                    "type": "number"
+                  },
+                  "topP": {
+                    "type": "number"
+                  },
+                  "maxTokens": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "timeoutMs": {
+                    "type": "number",
+                    "minimum": 1
+                  },
+                  "maxRetries": {
+                    "type": "number",
+                    "minimum": 0
+                  }
                 }
               },
               "thinking": {
