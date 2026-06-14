@@ -3,3 +3,4 @@ dist/
 *.vsix
 *.log
 IMPLEMENTATION_PLAN.md
+multi-provider-design.zh.md
