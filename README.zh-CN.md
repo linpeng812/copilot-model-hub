@@ -2,7 +2,7 @@
 
 [English](README.md) | 简体中文
 
-![自定义模型出现在 Copilot Chat 的模型选择器里](https://raw.githubusercontent.com/linpeng812/copilot-model-hub/main/img/ScreenShot_2026-06-15_032000_354.png)
+![自定义模型出现在 Copilot Chat 的模型选择器里](img/ScreenShot_2026-06-15_032000_354.png)
 
 > **你的 Copilot，你的模型。**
 

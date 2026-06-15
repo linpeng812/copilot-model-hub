@@ -2,7 +2,7 @@
 
 English | [简体中文](README.zh-CN.md)
 
-![Your custom models appearing in the Copilot Chat model picker](https://raw.githubusercontent.com/linpeng812/copilot-model-hub/main/img/ScreenShot_2026-06-15_032000_354.png)
+![Your custom models appearing in the Copilot Chat model picker](img/ScreenShot_2026-06-15_032000_354.png)
 
 Bring your own models into the **GitHub Copilot Chat** model picker. Configure any OpenAI, Anthropic, or compatible-gateway endpoint as a connection, and it shows up as a selectable model in Copilot Chat. Keys are stored in VS Code SecretStorage, never in settings.
 
